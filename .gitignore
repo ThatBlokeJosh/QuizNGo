@@ -1,0 +1,6 @@
+.env
+.git
+.key
+run.sh
+frontend.bak
+frontend/node_modules

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+    }
+  </script>
+<script src="lib/header.js" type="text/javascript"></script>
+<script src="lib/footer.js" type="text/javascript"></script> 
+</head>
+<div class="flex flex-col h-screen justify-between ">
+<header-component></header-component>
+<body>
+  <div class="flex justify-center">
+  <form method="POST">
+    <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      Quiz title
+    </label>
+<div class="flex relative mb-6">
+<span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    📜
+  </span>
+<input type="text" id="website-admin" name="title" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="World War 2" required>
+
+</div>
+<label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">URL</label>
+<div class="flex">
+  <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    📎
+  </span>
+  <input type="text" name="url" id="website-admin" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://en.wikipedia.org/wiki/World_War_II" required>
+</div>
+ <div class="text-center flex justify-center">
+<button type="submit" class="text-white m-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full py-2 text-center
+">Submit</button>
+ </div>
+</form>
+</div>
+</body>
+<footer-component></footer-component>
+</div>
+</html>
