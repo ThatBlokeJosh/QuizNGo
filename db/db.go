@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
   "github.com/joho/godotenv"
+  "web/thread"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -16,24 +17,26 @@ func Uri() string {
   return envFile["MONGO_URI"] 
 }
 
-type Question struct {
-  title string
-  options [4]string
-  answer string
-  number int
-}
-
-func makeQuizBson(q []Question, title string) bson.M {
+func makeQuizBson(q []thread.Question, title string) bson.M {
   var quiz bson.M = bson.M{
+    "type": "quiz",
+    "quiz": title,
     title: nil, 
   }
   var array []bson.M
   for i := 0; i <= len(q) - 1; i++ {
     array = append(array, bson.M{
-      "title": q[i].title, "optionA": q[i].options[i], "optionB": q[i].options[i], "optionC": q[i].options[i], "optionD": q[i].options[i], "answer": q[i].answer})
+      "question": q[i].Q, "optionA": q[i].A, "optionB": q[i].B, "optionC": q[i].C, "optionD": q[i].D, "answer": q[i].Correct})
   }
-  quiz["quiz"] = array
+  quiz["title"] = array
   return quiz
+}
+
+var db *mongo.Database
+var ctx context.Context
+
+func init() {
+  db, ctx = Connect("quiz")
 }
 
 func Connect(dbName string) (*mongo.Database, context.Context) {
@@ -54,7 +57,7 @@ func Connect(dbName string) (*mongo.Database, context.Context) {
   return db, ctx
 }
   
-func WriteQuiz(qSlice []Question, title string, dbName string, colName string) {
+func WriteQuiz(qSlice []thread.Question, title string,dbName string, colName string) {
   db, ctx := Connect(dbName)
   collection := db.Collection(colName)
 
@@ -72,8 +75,7 @@ func WriteQuiz(qSlice []Question, title string, dbName string, colName string) {
   fmt.Println("Result: ", result)
 }
 
-func Write(data bson.D, dbName string, colName string) {
-  db, ctx := Connect(dbName)
+func Write(data bson.D, colName string) {
   collection := db.Collection(colName)
 
   result, err := collection.InsertMany(ctx, []interface{}{
@@ -85,8 +87,7 @@ func Write(data bson.D, dbName string, colName string) {
   fmt.Println("Result: ", result)
 }
 
-func Read(filter bson.M, dbName string, colName string) []bson.M {
-  db, ctx := Connect(dbName)
+func Read(filter bson.M, colName string) []bson.M {
   collection := db.Collection(colName)
 
   filteredCursor, err := collection.Find(ctx, filter)
@@ -103,7 +104,7 @@ func Read(filter bson.M, dbName string, colName string) []bson.M {
 func UserExists(email string) bool {
   data := Read(bson.M{
     "email": email,
-  }, "quiz", email)
+  }, email)
 
   if data != nil {
     return true

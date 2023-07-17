@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+    }
+  </script>
+<script src="../lib/header.js" type="text/javascript"></script>
+<script src="../lib/footer.js" type="text/javascript"></script> 
+</head>
+<div class="flex flex-col h-screen justify-between ">
+<header-component></header-component>
+<body>
+  <div class="grid justify-center">
+    <h1 class="text-center text-4xl font-bold">{{ .Title }}</h1>
+    <ul class="flex text-center m-4 p-4 gap-2 justify-center">
+      {{ range .Questions }}
+      <ul class="grid max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <li class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Question: {{.Q}}?</li>
+        <ul class="flex gap-2 justify-center text-center">
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">A) {{.A}}</li>
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">B) {{.B}}</li>
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">C) {{.C}}</li>
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">D) {{.D}}</li>
+        </ul>
+        <li class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Correct: {{.Correct}}</li>
+      </ul>
+      {{end}}
+    </ul>
+  </div>
+</body>
+<footer-component></footer-component>
+</div>
+</html>

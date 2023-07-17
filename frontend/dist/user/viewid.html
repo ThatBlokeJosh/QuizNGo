@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+    }
+  </script>
+<script src="../lib/header.js" type="text/javascript"></script>
+<script src="../lib/footer.js" type="text/javascript"></script> 
+</head>
+<div class="flex flex-col h-screen justify-between ">
+<header-component></header-component>
+<body>
+  <div class="flex flex-col justify-center gap-2">
+  <h1 class="text-center text-4xl font-bold">{{.Title}}</h1>
+    <ul class="flex text-center gap-2 justify-center">
+     {{ range .Question }}
+      <ul class="grid max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <li class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Question: {{.question}}?</li>
+        <ul class="flex gap-2 justify-center text-center">
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">A) {{.optionA}}</li>
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">B) {{.optionB}}</li>
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">C) {{.optionC}}</li>
+          <li class="mb-3 font-normal text-gray-700 dark:text-gray-400">D) {{.optionD}}</li>
+        </ul>
+        <li class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Correct: {{.answer}}</li>
+      </ul>
+      {{end}}
+    </ul>
+    <div class="flex flex-cols justify-center w-screen gap-2">
+      {{if .isPrevious}}
+        <a href="/user/view/{{.PreviousId}}" class="m-0 p-0 w-1/5"><button class="bg-blue-700 text-white rounded-lg p-2 m-2 w-full hover:bg-blue-800"><===</button></a>
+      {{end}}
+      {{if .isNext}}
+          <a href="/user/view/{{.NextId}}" class="m-0 p-0 w-1/5"><button class="bg-blue-700 text-white rounded-lg p-2 m-2 w-full hover:bg-blue-800">===></button></a>
+      {{end}}
+    </div>
+  </div>
+</body>
+<footer-component></footer-component>
+</div>
+</html>

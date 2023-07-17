@@ -6,6 +6,8 @@ require (
 	github.com/foolin/pagser v0.1.5
 	github.com/gofiber/fiber/v2 v2.46.0
 	github.com/gofiber/template/html/v2 v2.0.4
+	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/joho/godotenv v1.5.1
 	go.mongodb.org/mongo-driver v1.11.7
 	golang.org/x/crypto v0.7.0
